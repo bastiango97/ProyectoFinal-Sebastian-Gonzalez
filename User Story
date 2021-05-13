@@ -1,0 +1,12 @@
+Voxmapp se dedica a crear productos tecnológicos para mejorar la rendición de cuentas y transparencia y correcta gobernanza a través de la recolección y análisis de datos. 
+1.	Registro de hospitales para el análisis de la pandemia 
+Una aplicación que permita generar el registro inicial (baseline) del hospital, modificar datos según sea necesario y levantar updates mensuales para las estadísticas del manejo de la pandemia 
+2.	Crear una base de datos funcional que facilite el análisis y modificación de datos
+Una base de datos con un modelo entidad-relación que facilite el guardado de datos, sea fácil de interpretar y pueda utilizarse para la creación de información a través de su interpretación 
+3.	Presentación de información 
+Creación de tableros para presentar la información dada en las encuestas. 
+
+Problem domain
+1.	Hospitales en zonas difíciles de accesar: La encuesta baseline debe poder ser tomada de forma remota sin la necesidad de una conexión a internet 
+2.	Hospitales no tiene permiso de compartir información: En muchos países el gobiernos está haciendo un esfuerzo para mantener las estadísticas reales de la pandemia secretas, con fines políticos. 
+3.	No se puede contactar hospitales: En muchas ocasiones los hospitales no responden, ya sea porque el numero de contacto es incorrecto, dejó de existir por razones externas, o simplemente estaban ocupados. 
