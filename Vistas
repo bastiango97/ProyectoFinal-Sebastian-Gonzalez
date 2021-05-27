@@ -1,0 +1,21 @@
+--Todos los update existosos de este mes
+select date_up as Fecha, oxygen as Oxigeno, name as Hospital, c.country_name as Pais, i.id_update as id from update1 u join inventory i on i.id_update = u.id_update join hospital h on h.id_hosp = u.id_hosp join country c on c.country_name = h.country_name 
+where  extract(month from date_up) = extract(month from current_date)
+
+
+--Qué hospitales no tienen un update exitoso en este mes? 
+select h.name as Hospital_sin_update from hospital h join country c on h.country_name=c.country_name where h.name not in (select h.name  from update1 u join inventory i on i.id_update = u.id_update join hospital h on h.id_hosp = u.id_hosp join country c on c.country_name = h.country_name 
+where  extract(month from date_up) = extract(month from current_date) and extract(year from date_up) = extract(year from current_date)) 
+
+
+-- A nivel pais, cuántos hospitales tienen cuánta cantidad de oxigeno disponible?
+select  c.country_name as Pais,i.oxygen as Oxigeno, count (t.Oxigeno) as Num_Hospitals from inventory i join(
+	select date_up as Fecha, oxygen as Oxigeno, name as Hospital, c.country_name as Pais, i.id_update as id from update1 u join inventory i on i.id_update = u.id_update join hospital h on h.id_hosp = u.id_hosp join country c on c.country_name = h.country_name 
+	where  extract(month from date_up) = extract(month from current_date and extract(year from date_up) = extract(year from current_date)) 
+) t on i.id_update = t.id join update1 u on i.id_update = u.id_update join hospital h on h.id_hosp = u.id_hosp join country c on c.country_name = h.country_name group by oxygen, c.country_name
+
+-- A nivel provincia, cuántos hospitales tienen cuánta cantidad de oxigeno disponible?
+select  h.prov as Provincia,i.oxygen as Oxigeno, count (t.Oxigeno) as Num_Hospitals from inventory i join(
+	select date_up as Fecha, oxygen as Oxigeno, name as Hospital, c.country_name as Pais, i.id_update as id from update1 u join inventory i on i.id_update = u.id_update join hospital h on h.id_hosp = u.id_hosp join country c on c.country_name = h.country_name 
+	where  extract(month from date_up) = extract(month from current_date) and extract(year from date_up) = extract(year from current_date)
+) t on i.id_update = t.id join update1 u on i.id_update = u.id_update join hospital h on h.id_hosp = u.id_hosp join country c on c.country_name = h.country_name group by oxygen, h.prov 
